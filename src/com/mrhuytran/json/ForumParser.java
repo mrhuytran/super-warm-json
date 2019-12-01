@@ -86,7 +86,7 @@ public class ForumParser {
     }
 
     private Post parsePostJson(JSONObject postJSON) {
-        Thread t = parseThreadJson(JSONObject postJSON);
+        Thread t = parseThreadJson(postJSON);
         String title = "";
         if (postJSON.get("title") instanceof String) {
             title = postJSON.getString("title");
