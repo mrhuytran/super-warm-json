@@ -1,6 +1,6 @@
 # super-warm-json
 
-## About Super Warm
+## Introduction
 
 **Our front-end**
 
