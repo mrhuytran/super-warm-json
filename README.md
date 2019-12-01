@@ -1,7 +1,7 @@
 # super-warm-json
 
-# About Super Warm
+## About Super Warm
 
-** Our front-end **
+**Our front-end**
 
-** Our back-end **
+**Our back-end**
