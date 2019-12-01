@@ -12,7 +12,8 @@ import java.util.List;
 
 public class Jsonifier {
 
-    public static JSONObject datePostedToJson(GregorianCalendar date) {
+    //helper function
+    private static JSONObject datePostedToJson(GregorianCalendar date) {
         JSONObject datePostedJSON = new JSONObject();
 
         //make a JSON object
@@ -26,11 +27,12 @@ public class Jsonifier {
     }
 
     //helper function
-    public static JSONObject threadToJson(Thread t) {
+    private static JSONObject threadToJson(Thread t) {
         JSONObject threadJSON = new JSONObject();
 
         //make a JSON object
         threadJSON.put("poster", t.getPoster().getName());
+        threadJSON.put("poster-points", t.getPoster().getPoints());
         threadJSON.put("body", t.getBody());
         threadJSON.put("date-posted", datePostedToJson(t.getDatePosted()));
 
@@ -38,7 +40,7 @@ public class Jsonifier {
     }
 
     //helper function
-    public static JSONArray threadListToJson(List<Thread> threads) {
+    private static JSONArray threadListToJson(List<Thread> threads) {
         JSONArray threadListJSON = new JSONArray();
 
         //make a JSON array
@@ -50,7 +52,7 @@ public class Jsonifier {
     }
 
     //helper function
-    public static JSONObject tagToJson(String t) {
+    private static JSONObject tagToJson(String t) {
         JSONObject tagJSON = new JSONObject();
 
         //make a JSON object
@@ -59,7 +61,7 @@ public class Jsonifier {
     }
 
     //helper function
-    public static JSONArray tagListToJson(List<String> tags) {
+    private static JSONArray tagListToJson(List<String> tags) {
         JSONArray tagListJSON = new JSONArray();
 
         //make a JSON array
@@ -70,7 +72,7 @@ public class Jsonifier {
         return tagListJSON;
     }
 
-    public static JSONObject postToJson(Post p) {
+    private static JSONObject postToJson(Post p) {
         JSONObject postJSON = new JSONObject();
 
         //make a JSON object
@@ -84,7 +86,8 @@ public class Jsonifier {
         return postJSON;
     }
 
-    public static JSONObject questionToJson(Question q) {
+    //helper function
+    private static JSONObject questionToJson(Question q) {
         JSONObject questionJSON = new JSONObject();
 
         //make a JSON object
@@ -94,7 +97,8 @@ public class Jsonifier {
         return questionJSON;
     }
 
-    public static JSONObject noteToJson(Note n) {
+    //helper function
+    private static JSONObject noteToJson(Note n) {
         JSONObject noteJSON = new JSONObject();
 
         //make a JSON object
@@ -103,21 +107,41 @@ public class Jsonifier {
         return noteJSON;
     }
 
-    public static JSONArray forumToJson(Forum f) {
-        JSONArray postListJSON = new JSONArray();
+    private static JSONArray questionListToJson(Forum f) {
+        JSONArray questionListJSON = new JSONArray();
         List<Question> questions = f.getQuestions();
-        List<Note> notes = f.getNotes();
 
         //make a JSON array
         for (Question q : questions) {
-            postListJSON.put(questionToJson(q));
+            questionListJSON.put(questionToJson(q));
         }
 
+        return questionListJSON;
+    }
+
+    private static JSONArray noteListToJson(Forum f) {
+        JSONArray noteListJSON = new JSONArray();
+        List<Note> notes = f.getNotes();
+
+        //make a JSON array
         for (Note n : notes) {
-            postListJSON.put(noteToJson(n));
+            noteListJSON.put(noteToJson(n));
         }
 
-        return postListJSON;
+        return noteListJSON;
+    }
+
+    //main Jsonifier function()
+    public static JSONObject forumToJson(Forum f) {
+        JSONObject forumJSON = new JSONObject();
+
+        //make a forum JSON object
+        forumJSON.put("title", f.getTitle());
+        forumJSON.put("questions", questionListToJson(f));
+        forumJSON.put("notes", noteListToJson(f));
+        forumJSON.put("Description", f.getDescription());
+
+        return forumJSON;
     }
 
     public static void main(String[] args) {
@@ -148,9 +172,9 @@ public class Jsonifier {
         forum.addNote(note1);
         forum.addNote((note2));
 
-        JSONArray jsonArray = forumToJson(forum);
+        JSONObject jsonObject = forumToJson(forum);
 
-        System.out.println(jsonArray);
+        System.out.println(jsonObject);
 
     }
 

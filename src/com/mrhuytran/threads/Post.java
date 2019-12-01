@@ -29,6 +29,15 @@ public class Post extends Thread {
          followUps = new ArrayList<Thread>();
      }
 
+    public Post(User poster, String body, String title, String header, ArrayList<String> tags, int views, ArrayList<Thread> followUps) {
+        super(poster, body);
+        this.title = title;
+        this.header = header;
+        this.tags = tags;
+        this.views = views;
+        this.followUps = followUps;
+    }
+
      public String getTitle() {
          return title;
      }

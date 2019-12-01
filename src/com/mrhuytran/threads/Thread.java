@@ -21,6 +21,12 @@ public class Thread {
         datePosted = new GregorianCalendar();
     }
 
+    public Thread(User poster, String body, GregorianCalendar datePosted) {
+        this.poster = poster;
+        this.body = body;
+        this.datePosted = datePosted;
+    }
+
     public User getPoster() {
         return poster;
     }

@@ -17,6 +17,12 @@ public class Question extends Post {
         answers = new ArrayList<Thread>();
     }
 
+    public Question(User poster, String body, String title, String header, ArrayList<String> tags,
+                    int views, ArrayList<Thread> followUps, ArrayList<Thread> answers) {
+        super(poster, body, title, header, tags, views, followUps);
+        this.answers = answers;
+    }
+
     public ArrayList<Thread> getAnswers() {
         return answers;
     }

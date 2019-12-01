@@ -26,6 +26,13 @@ public class Forum {
         notes = new ArrayList<Note>();
     }
 
+    public Forum(String title, String description, ArrayList<Question> questions, ArrayList<Note> notes) {
+        this.title = title;
+        this.description = description;
+        this.questions = questions;
+        this.notes = notes;
+    }
+
     public String getTitle() {
         return title;
     }
